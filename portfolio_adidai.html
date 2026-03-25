@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adidai Djele Raphael — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0f1419;
+    --paper: #f7f5f0;
+    --warm: #f0ece3;
+    --accent: #1a4a7c;
+    --accent-light: #2e6da4;
+    --muted: #8a8278;
+    --line: #ddd9d0;
+    --white: #ffffff;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(247, 245, 240, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+    transition: all .3s;
+  }
+  .nav-logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    text-decoration: none; font-size: 0.85rem; font-weight: 500;
+    color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase;
+    transition: color .2s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; width: 0; height: 1px;
+    background: var(--accent); transition: width .3s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a:hover::after { width: 100%; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    padding: 0 4rem;
+    gap: 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; top: -20%; right: -10%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(46,109,164,0.08) 0%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .hero-text { animation: fadeUp 0.9s ease both; }
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--accent-light);
+    margin-bottom: 1.2rem;
+  }
+  .hero-eyebrow span { display: block; width: 2rem; height: 1px; background: var(--accent-light); }
+  h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(3rem, 6vw, 5rem);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.5rem;
+  }
+  h1 em { font-style: italic; color: var(--accent); }
+  .hero-desc {
+    font-size: 1.05rem; color: var(--muted); max-width: 420px;
+    line-height: 1.7; margin-bottom: 2.5rem;
+  }
+  .hero-cta {
+    display: inline-flex; align-items: center; gap: 0.7rem;
+    padding: 0.9rem 2rem;
+    background: var(--accent); color: white;
+    text-decoration: none; font-size: 0.9rem; font-weight: 500;
+    border-radius: 3px; transition: all .25s;
+    letter-spacing: 0.03em;
+  }
+  .hero-cta:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(26,74,124,0.22); }
+  .hero-cta svg { transition: transform .25s; }
+  .hero-cta:hover svg { transform: translateX(3px); }
+
+  .hero-visual {
+    display: flex; flex-direction: column; gap: 1rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .card-profile {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 2.5rem;
+    display: flex; align-items: center; gap: 2rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+  .avatar-ring {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.8rem; color: white; letter-spacing: -0.02em;
+  }
+  .card-info h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.2rem; color: var(--ink); margin-bottom: 0.3rem;
+  }
+  .card-info p { font-size: 0.85rem; color: var(--muted); }
+  .card-info .badge {
+    display: inline-block; margin-top: 0.5rem;
+    padding: 0.25rem 0.8rem; background: rgba(26,74,124,0.08);
+    color: var(--accent); font-size: 0.75rem; font-weight: 600;
+    border-radius: 50px; letter-spacing: 0.05em;
+  }
+
+  .cards-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .mini-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 12px; padding: 1.4rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .mini-card .num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 2rem; color: var(--accent); display: block; line-height: 1;
+  }
+  .mini-card .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; font-weight: 500; }
+
+  /* ── SECTION GENERIC ── */
+  section { padding: 7rem 4rem; }
+  .section-header { margin-bottom: 4rem; }
+  .section-number {
+    font-size: 0.75rem; font-weight: 700; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--accent-light); margin-bottom: 0.8rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .section-number span { display: block; width: 1.5rem; height: 1px; background: var(--accent-light); }
+  h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.1; letter-spacing: -0.02em; color: var(--ink);
+  }
+  h2 em { font-style: italic; color: var(--accent); }
+
+  /* ── PROFIL ── */
+  .profil-section { background: var(--white); }
+  .profil-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .profil-text p {
+    font-size: 1.05rem; color: #444; line-height: 1.8; margin-bottom: 1.5rem;
+  }
+  .profil-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .detail-item {}
+  .detail-item .dt { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.3rem; }
+  .detail-item .dd { font-size: 0.95rem; color: var(--ink); font-weight: 500; }
+
+  .contact-block {
+    background: var(--warm); border-radius: 16px; padding: 2rem;
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .contact-row {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 0.8rem; background: var(--white);
+    border-radius: 10px; border: 1px solid var(--line);
+  }
+  .contact-icon {
+    width: 38px; height: 38px; background: var(--accent);
+    border-radius: 8px; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .contact-icon svg { color: white; }
+  .contact-row .ct { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+  .contact-row .cv { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+
+  /* ── SKILLS ── */
+  .skills-section { background: var(--paper); }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .skill-card {
+    background: var(--white); border: 1px solid var(--line);
+    border-radius: 14px; padding: 1.8rem;
+    transition: all .3s;
+    position: relative; overflow: hidden;
+  }
+  .skill-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
+    transform: scaleX(0); transform-origin: left; transition: transform .3s;
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(0,0,0,0.08); }
+  .skill-card:hover::before { transform: scaleX(1); }
+  .skill-icon { font-size: 1.5rem; margin-bottom: 1rem; }
+  .skill-card h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); margin-bottom: 0.5rem; }
+  .skill-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.5; }
+  .skill-level {
+    display: flex; gap: 4px; margin-top: 1rem;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); }
+  .dot.filled { background: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink); color: rgba(255,255,255,0.5);
+    padding: 3rem 4rem;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  footer .foot-name {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.1rem; color: white;
+  }
+  footer p { font-size: 0.82rem; margin-top: 0.3rem; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px; background: var(--line);
+    margin: 0 4rem;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { grid-template-columns: 1fr; padding: 8rem 2rem 4rem; min-height: auto; }
+    .hero-visual { order: -1; }
+    section { padding: 5rem 2rem; }
+    .profil-grid, .skills-grid { grid-template-columns: 1fr; }
+    .profil-details { grid-template-columns: 1fr 1fr; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2.5rem 2rem; }
+    .divider { margin: 0 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">ADR</a>
+  <ul class="nav-links">
+    <li><a href="#profil">Profil</a></li>
+    <li><a href="#competences">Compétences</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="accueil">
+  <div class="hero-text">
+    <div class="hero-eyebrow"><span></span> Portfolio</div>
+    <h1>Adidai<br>Djele <em>Raphael</em></h1>
+    <p class="hero-desc">
+      Étudiant en réseaux et télécommunications, passionné par l'installation et la maintenance des infrastructures informatiques.
+    </p>
+    <a href="#contact" class="hero-cta">
+      Me contacter
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <div class="hero-visual">
+    <div class="card-profile">
+      <div class="avatar-ring">AR</div>
+      <div class="card-info">
+        <h3>Adidai Djele Raphael</h3>
+        <p>Maroua, Cameroun</p>
+        <span class="badge">Cycle Ingénieur — ENSP Maroua</span>
+      </div>
+    </div>
+    <div class="cards-row">
+      <div class="mini-card">
+        <span class="num">7+</span>
+        <div class="lbl">Années de formation</div>
+      </div>
+      <div class="mini-card">
+        <span class="num">2</span>
+        <div class="lbl">Stages effectués</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROFIL -->
+<section class="profil-section reveal" id="profil">
+  <div class="section-header">
+    <div class="section-number"><span></span> 01</div>
+    <h2>À propos <em>de moi</em></h2>
+  </div>
+  <div class="profil-grid">
+    <div class="profil-text">
+      <p>
+        Étudiant en réseaux et télécommunications à l'École Nationale Supérieure Polytechnique de Maroua, je suis sérieux, motivé et passionné par les technologies réseau.
+      </p>
+      <p>
+        Mes compétences couvrent la configuration des réseaux LAN/WAN, les protocoles TCP/IP, DNS, DHCP, HTTP, ainsi que le routage statique et dynamique (OSPF, RIP). Je souhaite développer mon expertise à travers un stage pratique en entreprise.
+      </p>
+      <div class="profil-details">
+        <div class="detail-item"><div class="dt">Date de naissance</div><div class="dd">10 août 2006</div></div>
+        <div class="detail-item"><div class="dt">Localisation</div><div class="dd">MTE-Souledé, Cameroun</div></div>
+        <div class="detail-item"><div class="dt">Nationalité</div><div class="dd">Camerounaise</div></div>
+        <div class="detail-item"><div class="dt">Situation</div><div class="dd">Célibataire</div></div>
+        <div class="detail-item"><div class="dt">Formation actuelle</div><div class="dd">Cycle Ingénieur — ENSP</div></div>
+        <div class="detail-item"><div class="dt">Disponibilité</div><div class="dd">Stage dès maintenant</div></div>
+      </div>
+    </div>
+
+    <div id="contact">
+      <div class="contact-block">
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </div>
+          <div>
+            <div class="ct">Email</div>
+            <div class="cv">adidairaphael@gmail.com</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.64 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.55 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="ct">Téléphone</div>
+            <div class="cv">692 933 806</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div class="ct">Adresse</div>
+            <div class="cv">MTE-Souledé, Maroua, Cameroun</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- COMPÉTENCES -->
+<section class="skills-section reveal" id="competences">
+  <div class="section-header">
+    <div class="section-number"><span></span> 02</div>
+    <h2>Compétences <em>techniques</em></h2>
+  </div>
+  <div class="skills-grid">
+    <div class="skill-card">
+      <div class="skill-icon">🌐</div>
+      <h3>Configuration des réseaux</h3>
+      <p>Mise en place et administration de réseaux LAN et WAN.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔗</div>
+      <h3>Protocoles réseau</h3>
+      <p>TCP/IP, DNS, DHCP, HTTP — maîtrise des protocoles fondamentaux.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🗺️</div>
+      <h3>Routage</h3>
+      <p>Routage statique et dynamique : OSPF, RIP.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🔒</div>
+      <h3>Sécurité réseau</h3>
+      <p>Notions de base en protection et sécurisation des infrastructures.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">📡</div>
+      <h3>Réseaux mobiles</h3>
+      <p>2G, 3G, 4G et notions de 5G.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+    <div class="skill-card">
+      <div class="skill-icon">🖥️</div>
+      <h3>Systèmes d'exploitation</h3>
+      <p>Linux et Windows Server — administration et configuration.</p>
+      <div class="skill-level">
+        <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-name">Adidai Djele Raphael</div>
+    <p>Étudiant en Réseaux & Télécommunications — ENSP Maroua</p>
+  </div>
+  <p>© 2025 — Tous droits réservés</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => obs.observe(r));
+
+  // Nav shrink on scroll
+  window.addEventListener('scroll', () => {
+    document.querySelector('nav').style.padding = window.scrollY > 40 ? '0.8rem 4rem' : '1.2rem 4rem';
+  });
+</script>
+</body>
+</html>
